@@ -6,8 +6,25 @@ defmodule Hello.Application do
   def start(_type, _args) do
     import Supervisor.Spec
 
+
+# Example configuration
+datadog_opts =
+  [
+    host: System.get_env("DATADOG_HOST") || "localhost",
+    port: System.get_env("DATADOG_PORT") || 8126,
+    batch_size: System.get_env("SPANDEX_BATCH_SIZE") || 1,
+    sync_threshold: System.get_env("SPANDEX_SYNC_THRESHOLD") || 10,
+    http: HTTPoison,
+    verbose?: true
+  ]
+
+
+
+
+
     # Define workers and child supervisors to be supervised
     children = [
+      worker(SpandexDatadog.ApiServer, [datadog_opts]), 
       # Start the Ecto repository
       supervisor(Hello.Repo, []),
       # Start the endpoint when the application starts

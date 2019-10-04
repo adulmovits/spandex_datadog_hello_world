@@ -33,6 +33,9 @@ defmodule Hello.Mixfile do
   # Type `mix help deps` for examples and options.
   defp deps do
     [
+      {:httpoison, "~> 1.6"}, 
+      {:spandex, "~> 2.4.1"},
+      {:spandex_datadog, "~> 0.4.0"},
       {:phoenix, "~> 1.3.0"},
       {:phoenix_pubsub, "~> 1.0"},
       {:phoenix_ecto, "~> 3.2"},
